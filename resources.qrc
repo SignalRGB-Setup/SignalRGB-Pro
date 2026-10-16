@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>org.openrgb.OpenRGB.png</file>
+        <file>fonts/OpenRGB.ttf</file>
+        <file>OpenRGBMonochrome.png</file>
+    </qresource>
+</RCC>

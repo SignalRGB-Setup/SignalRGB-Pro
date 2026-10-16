@@ -1,0 +1,6 @@
+{
+  "name": "signalrgb",
+  "private": true,
+  "license": "SEE LICENSE",
+  "description": "SignalRGB lighting, fan curves, and hardware monitoring for Windows."
+}
